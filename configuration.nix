@@ -9,6 +9,7 @@
   imports = [
     ./hardware-configuration.nix
     ./modules/bluetooth-audio.nix
+    ./modules/nvidia.nix
   ];
 
   # Boot

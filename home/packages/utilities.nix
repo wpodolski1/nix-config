@@ -13,6 +13,8 @@
 
     btop
     wl-clipboard
+    pciutils
+    ripgrep
 
     basedpyright
     ruff
