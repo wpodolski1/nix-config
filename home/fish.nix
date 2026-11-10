@@ -7,10 +7,10 @@
 
     # Commands that expand when pressing Space
     shellAbbrs = {
-      ns = "nh os switch /etc/nixos -H user";
-      nb = "nh os boot /etc/nixos -H user";
-      nt = "nh os test /etc/nixos -H user";
-      nu = "sudo nix flake update --flake /etc/nixos";
+      ns = "nh os switch /home/wojt/nix-config -H user";
+      nb = "nh os boot /home/wojt/nix-config -H user";
+      nt = "nh os test /home/wojt/nix-config -H user";
+      nu = "sudo nix flake update --flake /home/wojt/nix-config";
       nq = "sudo nix-collect-garbage --delete-old";
       v = "nvim";
       svim = "sudoedit";

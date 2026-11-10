@@ -32,7 +32,7 @@
               useGlobalPkgs = true;
               useUserPackages = true;
               extraSpecialArgs = { inherit inputs; };
-              users.user = import ./home/default.nix;
+              users.wojt = import ./home/default.nix;
             };
           }
         ];

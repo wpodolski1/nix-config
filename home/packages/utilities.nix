@@ -12,6 +12,7 @@
     nh
 
     btop
+    wl-clipboard
 
     basedpyright
     ruff

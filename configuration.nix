@@ -38,7 +38,7 @@
   # Keyboard layout (shared with Wayland through xkb)
   services.xserver.xkb.layout = "us";
 
-  users.users.user = {
+  users.users.wojt = {
     isNormalUser = true;
     extraGroups = [
       "networkmanager"

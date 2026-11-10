@@ -37,12 +37,12 @@ Don't update `flake.lock` when restoring the same versions. Don't bump
 
    ```bash
    nix-shell -p git
-   git clone https://github.com/YOUR-USER/YOUR-REPO.git "$HOME/nixos-config"
-   cd "$HOME/nixos-config"
+   git clone https://github.com/YOUR-USER/YOUR-REPO.git "$HOME/nix-config"
+   cd "$HOME/nix-config"
    cp /etc/nixos/hardware-configuration.nix ./hardware-configuration.nix
    ```
 
-4. Replace placeholder account `user` in `configuration.nix`, `flake.nix`
+4. If using a different account, replace `wojt` in `configuration.nix`, `flake.nix`
    (Home Manager user), and `home/default.nix` (username + home path).
    Keep `#user` as the flake target, or rename it and update `home/fish.nix` too.
 5. Review the new hardware file and preserve required boot/encryption settings
@@ -64,8 +64,8 @@ Home Manager file conflicts: back up the reported file, then retry.
 - Zen profile name: `home/zen.nix`; browser data needs a separate backup.
 - Lock wallpaper: `~/Wallpaper/evening_sky.png` (not in Git).
 - Themes: Tokyo Night for Noctalia/Hyprlock; Catppuccin Mocha for Kitty/Zen.
-- Fish rebuild shortcuts use `/etc/nixos`; change paths in `home/fish.nix`
-  if working from `~/nixos-config`.
+- Fish rebuild shortcuts use `/home/wojt/nix-config`; change paths in
+  `home/fish.nix` if using a different account or checkout location.
 - Restore documents, keys, passwords, and app data separately. Keep plaintext
   secrets outside this tree: `.gitignore` does not protect the Nix store.
 - Recovery: choose an older boot generation, or

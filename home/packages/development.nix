@@ -12,5 +12,7 @@
     herdr
     opencode
     #codex
+    gh
+
   ];
 }
