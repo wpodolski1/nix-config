@@ -1,0 +1,47 @@
+# Nix build output symlinks (including numbered and named outputs).
+result
+result-*
+
+# Local Nix/development caches; keep .envrc and flake.lock versioned.
+.direnv/
+.devenv/
+.cache/
+
+# Environment credentials; sanitized templates may be committed.
+.env
+.env.*
+!.env.example
+!.env.sample
+!.env.template
+
+# Plaintext secrets and private key material.
+# Keep encrypted agenix/SOPS files (*.age, *.sops.*) and .sops.yaml versioned.
+secrets.local/
+*.secret
+*.secrets
+*.key
+*.pem
+*.p12
+*.pfx
+id_rsa
+id_dsa
+id_ecdsa
+id_ed25519
+ssh_host_*_key
+age-keys.txt
+keys.txt
+.netrc
+.npmrc
+.pypirc
+
+# Editor swap files, backups, and OS metadata.
+*.swp
+*.swo
+*~
+\#*\#
+.\#*
+*.bak
+*.orig
+*.rej
+.DS_Store
+Thumbs.db
