@@ -1,4 +1,4 @@
-# Umbriel configuration migrated from ../niri/config.kdl.
+# Umbriel desktop configuration.
 #
 # Copy this file to ~/.config/umbriel/config.toml. Most changes apply when the
 # file is saved. Check edits with `umbriel config validate`.
@@ -103,8 +103,7 @@ position = [3640, 420]
 #
 [appearance]
 prefer_no_csd = false
-# Umbriel has borders rather than Niri's separate focus ring. Rules below
-# hide them on unfocused windows; per-monitor inactive focus rings differ.
+# Rules below hide borders on unfocused windows.
 border_width = 4
 outer_border_width = 0
 corner_radius = 12
@@ -121,7 +120,6 @@ enabled = false
 softness = 40
 offset_x = 0
 offset_y = 8
-# Niri's shadow spread = 12 has no Umbriel equivalent.
 
 [appearance.blur]
 enabled = true
@@ -254,7 +252,7 @@ follows_mouse = "off"
 "Ctrl+Alt+Delete" = { action = "session-quit", repeat = false }
 "Mod+Shift+P" = { action = "dpms-off", repeat = false }
 
-# Preserve Niri's 10% volume/brightness steps, cap, and microphone mute.
+# Use 10% volume/brightness steps, cap volume at 100%, and support microphone mute.
 "XF86AudioRaiseVolume" = { action = "spawn wpctl set-volume @DEFAULT_AUDIO_SINK@ 0.1+ -l 1.0", allow_when_locked = true }
 "XF86AudioLowerVolume" = { action = "spawn wpctl set-volume @DEFAULT_AUDIO_SINK@ 0.1-", allow_when_locked = true }
 "XF86AudioMute" = { action = "spawn wpctl set-mute @DEFAULT_AUDIO_SINK@ toggle", allow_when_locked = true }
@@ -322,7 +320,7 @@ follows_mouse = "off"
 "Mod+BracketLeft" = "window-consume-or-expel-left"
 "Mod+BracketRight" = "window-consume-or-expel-right"
 "Mod+Comma" = "window-consume-from-right"
-# Umbriel expels the focused window, not necessarily Niri's bottom window.
+# Move the focused window out to the right.
 "Mod+Period" = "window-move-right"
 "Mod+C" = "column-center"
 # No direct documented equivalents; deliberately leave these unbound:
@@ -385,8 +383,8 @@ follows_mouse = "off"
 "Mod+Ctrl+8" = "column-move-to-workspace 8"
 "Mod+Ctrl+9" = "column-move-to-workspace 9"
 
-# Noctalia replaces Niri's built-in capture UI. Its screenshot settings control
-# filenames and clipboard output; preserve Niri's directory and PNG saving.
+# Noctalia handles screenshots; its settings control filenames and clipboard
+# output. Save PNG files to ~/Pictures/Screenshots.
 "Print" = { action = "spawn noctalia msg screenshot-region --directory ~/Pictures/Screenshots --format png --save-to-file", repeat = false }
 "Ctrl+Print" = { action = "spawn noctalia msg screenshot-fullscreen --directory ~/Pictures/Screenshots --format png --save-to-file", repeat = false }
 "Alt+Print" = { action = "spawn noctalia msg screenshot-window --directory ~/Pictures/Screenshots --format png --save-to-file", repeat = false }
@@ -399,7 +397,7 @@ follows_mouse = "off"
 # https://docs.noctalia.dev/umbriel/layout/
 [layout]
 mode = "scrolling"
-gap = 8
+gap = 6
 extent_presets = [0.33333, 0.5, 0.66667]
 client_maximize = "edges"
 
@@ -443,7 +441,7 @@ center_underfull_strip = false
 # Rules combine in order, with later values overriding earlier ones.
 # https://docs.noctalia.dev/umbriel/window-rules/
 
-# Base appearance: Niri's border is disabled and only its focus ring is shown.
+# Base appearance for focused windows; inactive effects are applied below.
 [[window_rule]]
 opacity = 1.0
 blur = false
@@ -456,16 +454,12 @@ opacity = 0.8
 blur = true
 shadow = true
 
-# Niri excluded Chromium from the entire inactive-window effects rule.
+# Exclude Chromium from inactive-window opacity, blur, and shadow effects.
 [[window_rule]]
 match.app_id = "chromium"
 opacity = 1.0
 blur = false
 shadow = false
-
-# Niri's empty WezTerm default-column-width requests the client-chosen width.
-# Umbriel has no documented per-window way to unset the global half-width
-# default, so that workaround is not reproduced.
 
 [[window_rule]]
 match.app_id = "^dev.noctalia.Noctalia$"
