@@ -11,4 +11,5 @@
       builtin = "Tokyo-Night"; # Noctalia built-in palette.
     };
   };
+
 }

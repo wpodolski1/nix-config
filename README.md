@@ -58,13 +58,46 @@ Don't update `flake.lock` when restoring the same versions. Don't bump
 Log in on a TTY and run `niri-session` (no graphical login manager configured).
 Home Manager file conflicts: back up the reported file, then retry.
 
+## Umbriel experiment (disabled)
+
+Niri is the active compositor again because Umbriel failed with mixed
+NVIDIA/AMD outputs. The Umbriel flake input and configuration files are kept
+for future testing, but neither `modules/umbriel.nix` nor `home/umbriel.nix`
+is currently imported. The notes below apply only if Umbriel is re-enabled.
+
+- Apply this checkout with `sudo nixos-rebuild switch --flake .#user`.
+  Confirm `~/.config/umbriel/config.toml` exists; without it, Umbriel uses
+  its packaged defaults instead of this checkout's monitors and shortcuts.
+- Noctalia provides the bar, launcher, wallpaper, and notifications; Waybar
+  is not configured. When re-enabling Umbriel, bind Noctalia's service to
+  `umbriel-session.target` rather than the shared graphical target, which
+  can stay active across compositor changes. Launch with `start-umbriel`.
+- If Noctalia is missing in a running Umbriel session:
+
+  ```bash
+  systemctl --user status umbriel.service noctalia.service
+  systemctl --user restart noctalia.service
+  journalctl --user -b -u noctalia.service -n 80 --no-pager
+  ```
+
+- Validate configuration with
+  `umbriel config validate -c home/umbriel/config.toml`.
+- Inspect displays with `umbriel outputs`. Rendering errors such as
+  `Failed to pick primary buffer format` / `Failed to create swapchain`
+  are a separate graphics problem, not a missing bar. Inspect
+  `journalctl --user -b -u umbriel.service` and `~/.cache/umbriel/umbriel.log`.
+  With multiple GPUs, check which GPU each monitor is connected to before
+  excluding devices: excluding a GPU also loses its connected displays.
+- Upstream: https://docs.noctalia.dev/umbriel/installation/ and
+  https://docs.noctalia.dev/umbriel/configuration/.
+
 ## Things to remember
 
 - Monitors/keybinds: `home/niri/config.kdl`.
 - Zen profile name: `home/zen.nix`; browser data needs a separate backup.
 - Lock wallpaper: `~/Wallpaper/evening_sky.png` (not in Git).
 - Themes: Tokyo Night for Noctalia/Hyprlock; Catppuccin Mocha for Kitty/Zen.
-- Fish rebuild shortcuts use `/home/wojt/nix-config`; change paths in
+- Fish rebuild shortcuts use `/home/wojt/nix-config-umbriel`; change paths in
   `home/fish.nix` if using a different account or checkout location.
 - Restore documents, keys, passwords, and app data separately. Keep plaintext
   secrets outside this tree: `.gitignore` does not protect the Nix store.

@@ -6,6 +6,8 @@
     # Citrix Workspace is packaged from nixpkgs master.
     nixpkgs-citrix.url = "github:NixOS/nixpkgs/master";
 
+    umbriel.url = "github:noctalia-dev/umbriel";
+
     home-manager = {
       url = "github:nix-community/home-manager";
       inputs.nixpkgs.follows = "nixpkgs";
@@ -24,6 +26,7 @@
       formatter.x86_64-linux = nixpkgs.legacyPackages.x86_64-linux.nixfmt;
 
       nixosConfigurations.user = nixpkgs.lib.nixosSystem {
+        specialArgs = { inherit inputs; };
         modules = [
           ./configuration.nix
           home-manager.nixosModules.home-manager
