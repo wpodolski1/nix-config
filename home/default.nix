@@ -7,7 +7,7 @@
     ./hypridle.nix
     ./hyprlock.nix
     ./kitty.nix
-    ./niri.nix
+    ./umbriel.nix
     ./noctalia.nix
     ./zen.nix
     ./packages

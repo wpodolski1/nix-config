@@ -5,6 +5,10 @@
     enable = true;
     preferAbbrs = true;
 
+    interactiveShellInit = ''
+      set -g fish_greeting
+      '';
+
     # Commands that expand when pressing Space
     shellAbbrs = {
       ns = "nh os switch /home/wojt/nix-config-umbriel -H user";

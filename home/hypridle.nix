@@ -8,7 +8,7 @@
       general = {
         lock_cmd = "pidof hyprlock || hyprlock";
         before_sleep_cmd = "pidof hyprlock || hyprlock";
-        after_sleep_cmd = "niri msg action power-on-monitors";
+        after_sleep_cmd = "umbriel msg dpms-on";
       };
 
       listener = [
@@ -23,8 +23,8 @@
         }
         {
           timeout = 900;
-          on-timeout = "niri msg action power-off-monitors";
-          on-resume = "niri msg action power-on-monitors";
+          on-timeout = "umbriel msg dpms-off";
+          on-resume = "umbriel msg dpms-on";
         }
       ];
     };
